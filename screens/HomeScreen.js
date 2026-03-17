@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { theme } from "../styles/theme";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -10,10 +11,13 @@ export default function HomeScreen({ navigation }) {
         Search delicious recipes from around the world.
       </Text>
 
-      <Button
-        title="Search Recipes"
+      <TouchableOpacity 
+        style={[styles.button, theme.shadow.medium]}
         onPress={() => navigation.navigate("Recipes")}
-      />
+        activeOpacity={0.8}
+      >
+        <Text style={styles.buttonText}>🔍 Search Recipes</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -21,19 +25,38 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.background,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingHorizontal: theme.spacing.lg,
   },
-
   title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 20
-  },
-
-  description: {
-    fontSize: 16,
+    ...theme.typography.h1,
+    color: theme.primary,
     textAlign: "center",
-    marginBottom: 30
-  }
+    marginBottom: theme.spacing.md,
+    textShadowColor: "rgba(0,0,0,0.1)",
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 4,
+  },
+  description: {
+    ...theme.typography.body,
+    color: theme.textSecondary,
+    textAlign: "center",
+    marginBottom: theme.spacing.xl,
+    lineHeight: 24,
+    paddingHorizontal: theme.spacing.md,
+  },
+  button: {
+    backgroundColor: theme.primary,
+    paddingVertical: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.xl,
+    borderRadius: theme.borderRadius.xl,
+    minWidth: 240,
+  },
+  buttonText: {
+    color: theme.surface,
+    ...theme.typography.h3,
+    textAlign: "center",
+  },
 });
